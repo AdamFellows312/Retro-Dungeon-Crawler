@@ -36,8 +36,8 @@ public class Grid<TGridObject>
             for (int z = 0; z < gridArray.GetLength(1); z++)
             {
                 // Create text displaying what content is held by grid cell
-                debugTextArray[x, z] = UtilsClass.CreateWorldText(gridArray[x, z]?.ToString(),
-                    null, GetWorldPosition(x, z) + new Vector3(cellSize, cellSize) * 0.5f, 10, Color.white, TextAnchor.MiddleCenter);
+                //debugTextArray[x, z] = UtilsClass.CreateWorldText(gridArray[x, z]?.ToString(),
+                //    null, GetWorldPosition(x, z) + new Vector3(cellSize, cellSize) * 0.5f, 10, Color.white, TextAnchor.MiddleCenter);
                 // Draw the grid
                 Debug.DrawLine(GetWorldPosition(x, z), GetWorldPosition(x, z + 1), Color.white, 100.0f);
                 Debug.DrawLine(GetWorldPosition(x, z), GetWorldPosition(x + 1, z), Color.white, 100.0f);
@@ -49,7 +49,7 @@ public class Grid<TGridObject>
 
         OnGridValueChanged += (object sender, OnGridValueChangedEventArgs eventArgs) =>
         {
-            debugTextArray[eventArgs.x, eventArgs.z].text = gridArray[eventArgs.x, eventArgs.z]?.ToString();
+           // debugTextArray[eventArgs.x, eventArgs.z].text = gridArray[eventArgs.x, eventArgs.z]?.ToString();
         };
     }
 
@@ -71,7 +71,7 @@ public class Grid<TGridObject>
         {
             // Update the value at these grid coordinates
             gridArray[x, z] = value;
-            debugTextArray[x, z].text = gridArray[x, z]?.ToString();
+            //debugTextArray[x, z].text = gridArray[x, z]?.ToString();
             // Denote grid has been changed
             if (OnGridValueChanged != null) { OnGridValueChanged(this, new OnGridValueChangedEventArgs { x = x, z = z }); }
         }
@@ -112,6 +112,16 @@ public class Grid<TGridObject>
     public bool IsValidGridPosition(int x, int z)
     {
         return x >= 0.0f && z >= 0.0f && x < width && z < height;
+    }
+
+    public float GetWidth()
+    {
+        return width;
+    }
+
+    public float GetHeight()
+    {
+        return height;
     }
 }
 

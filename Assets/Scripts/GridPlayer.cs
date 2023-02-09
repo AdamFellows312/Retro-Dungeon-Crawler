@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : GridCharacter
+public class GridPlayer : GridCharacter
 {
     private void Start()
     {
         // Get the grid
         myGrid = GridManager.instance.characterGrid;
+
+        // Get this player's position on the grid
+        myGrid.GetXZ(transform.position, out x, out z);
+
         // Initialise the position of the player on the grid
         UpdatePosition();
+        BreatheEffect();
     }
 
     private void Update()

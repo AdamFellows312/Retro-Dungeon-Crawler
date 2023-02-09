@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 /// <summary>
 /// A class that defines characters on the grid, including the player and enemies
 /// </summary>
 public class GridCharacter : GridEntity
 {
-    [SerializeField] private int x;
-    [SerializeField] private int z;
+    public bool spriteBreathe = true;
+    [Space(10)]
+
+
     [Space(10)]
 
     [SerializeField] private float transitionDuration = 0.25f;
+    [SerializeField] private float scaleSpeed = 2.5f;
 
     public void MoveUp()
     {
@@ -111,5 +115,20 @@ public class GridCharacter : GridEntity
             yield return null;
         }
         transform.position = targetPosition;
+    }
+
+    public void BreatheEffect()
+    {
+        // Don't use the breathing effect if sprite breathing is off
+        if (!spriteBreathe) { return; }
+
+        Vector3 targetScale = new Vector3(transform.GetChild(0).localScale.x, 1.15f, transform.GetChild(0).localScale.z);
+
+        var sequence = DOTween.Sequence()
+            .Append(transform.GetChild(0).DOScale(targetScale, scaleSpeed))
+            .Append(transform.GetChild(0).DOScale(Vector3.one, scaleSpeed));
+
+        //sequence.SetEase(Ease.Linear);
+        sequence.SetLoops(-1, LoopType.Restart);
     }
 }

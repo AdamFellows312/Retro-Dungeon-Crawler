@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GridEntity : MonoBehaviour
 {
+    public int x;
+    public int z;
+
     // Set in the classes that inherit from this class
     public Grid<GridEntity> myGrid;
 
