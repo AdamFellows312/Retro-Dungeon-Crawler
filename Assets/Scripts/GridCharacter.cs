@@ -8,14 +8,15 @@ using DG.Tweening;
 /// </summary>
 public class GridCharacter : GridEntity
 {
+
     public bool spriteBreathe = true;
-    [Space(10)]
-
-
     [Space(10)]
 
     [SerializeField] private float transitionDuration = 0.25f;
     [SerializeField] private float scaleSpeed = 2.5f;
+    [Space(10)]
+
+    public List<GridManager.Node> currentPath = null;
 
     public void MoveUp()
     {
